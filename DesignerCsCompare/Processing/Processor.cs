@@ -71,6 +71,18 @@ namespace DesignerCsCompare.Processing
         {
             var trimmedText = s.TrimStart();
 
+            // Rule 1: remove '()' after ISupportInitialize
+            if (trimmedText.StartsWith("((System.ComponentModel.ISupportInitialize)(this."))
+            {
+                var pos = trimmedText.IndexOf("(this.", StringComparison.Ordinal);
+                trimmedText = trimmedText.Remove(pos, 1); // ( symbol
+
+                pos = trimmedText.IndexOf(")", pos, StringComparison.Ordinal);
+                if (pos > 0)
+                    trimmedText = trimmedText.Remove(pos, 1); // ) symbol
+            }
+
+            // Rule 2: remove 'this.'
             trimmedText = trimmedText.Replace("this.", "");
 
             return trimmedText;
