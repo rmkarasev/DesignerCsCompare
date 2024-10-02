@@ -5,6 +5,7 @@
 # User-specific files
 *.suo
 *.user
+*.lnk
 
 # Build results
 bin/

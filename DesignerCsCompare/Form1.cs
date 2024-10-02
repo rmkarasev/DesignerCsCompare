@@ -1,5 +1,6 @@
 using System.Diagnostics;
 using DesignerCsCompare.Processing;
+using DesignerCsCompare.Properties;
 using DesignerCsCompare.Settings;
 
 namespace DesignerCsCompare
@@ -13,6 +14,8 @@ namespace DesignerCsCompare
         public Form1(IUserSettingsRepository userSettingsRepository)
         {
             InitializeComponent();
+
+            Icon = Resources.icon;
 
             Size = new Size(1200, 700);
             StartPosition = FormStartPosition.CenterScreen;
