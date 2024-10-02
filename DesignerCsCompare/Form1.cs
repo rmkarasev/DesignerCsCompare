@@ -1,17 +1,59 @@
 using System.Diagnostics;
 using DesignerCsCompare.Processing;
+using DesignerCsCompare.Settings;
 
 namespace DesignerCsCompare
 {
     public partial class Form1 : Form
     {
+        private readonly IUserSettingsRepository _userSettingsRepository;
+        private UserSettings _userSettings;
         private int _runCount = 0;
 
-        public Form1()
+        public Form1(IUserSettingsRepository userSettingsRepository)
         {
             InitializeComponent();
 
+            Size = new Size(1200, 700);
+            StartPosition = FormStartPosition.CenterScreen;
+
+            _userSettingsRepository = userSettingsRepository;
+
             UpdateToolStrip(_runCount, TimeSpan.Zero);
+        }
+
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+
+            _userSettings = _userSettingsRepository.GetSettings();
+
+            if (_userSettings.WindowState == FormWindowState.Maximized)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+            else if (_userSettings.WindowState == FormWindowState.Normal)
+            {
+                WindowState = FormWindowState.Normal;
+
+                var bounds = _userSettings.WindowBounds;
+                if (bounds.Left >= 0 && bounds.Width > 20 && bounds.Width <= Screen.PrimaryScreen.WorkingArea.Width)
+                    Bounds = bounds;
+            }
+
+            txtSourceLeft.Text = _userSettings.LeftText;
+            txtSourceRight.Text = _userSettings.RightText;
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+
+            _userSettings.WindowState = WindowState;
+            _userSettings.WindowBounds = Bounds;
+            _userSettings.LeftText = txtSourceLeft.Text;
+            _userSettings.RightText = txtSourceRight.Text;
+            _userSettingsRepository.SaveSettings(_userSettings);
         }
 
         private void btnRunCompare_Click(object sender, EventArgs e)
