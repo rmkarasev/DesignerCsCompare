@@ -19,5 +19,7 @@ namespace DesignerCsCompare.Settings
         public FormWindowState WindowState { get; set; }
 
         public Rectangle WindowBounds { get; set; }
+        
+        public string BeyondComparePath { get; set; }
     }
 }

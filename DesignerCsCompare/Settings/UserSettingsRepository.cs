@@ -49,6 +49,11 @@ internal class UserSettingsRepository : IUserSettingsRepository
         File.WriteAllText(_rightRecentTextPath, userSettings.RightText ?? "");
     }
 
+    private static string GetUserSettingsDir()
+    {
+        return AppDataUtils.GetAppDataDir();
+    }
+
     private static string GetUserSettingsPath()
     {
         var settingsDir = GetUserSettingsDir();
@@ -67,13 +72,5 @@ internal class UserSettingsRepository : IUserSettingsRepository
         var settingsDir = GetUserSettingsDir();
         var path = Path.Combine(settingsDir, "rightRecentText.txt");
         return path;
-    }
-
-    private static string GetUserSettingsDir()
-    {
-        var appName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
-        var appDataDir = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        var settingsDir = Path.Combine(appDataDir, appName);
-        return settingsDir;
     }
 }

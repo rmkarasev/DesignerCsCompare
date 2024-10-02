@@ -42,8 +42,12 @@
             stripRunCount = new ToolStripLabel();
             stripRunTime = new ToolStripLabel();
             groupBox1 = new GroupBox();
+            btnSendToBComp = new Button();
             btnRunCompare = new Button();
             tabPage3 = new TabPage();
+            btnBComp = new Button();
+            txtBComp = new TextBox();
+            label1 = new Label();
             panel1 = new Panel();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
@@ -58,6 +62,7 @@
             splitContainer2.SuspendLayout();
             toolStrip1.SuspendLayout();
             groupBox1.SuspendLayout();
+            tabPage3.SuspendLayout();
             SuspendLayout();
             // 
             // splitContainer1
@@ -112,7 +117,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Dock = DockStyle.Fill;
-            tabControl1.ItemSize = new Size(100, 23);
+            tabControl1.ItemSize = new Size(100, 28);
             tabControl1.Location = new Point(0, 3);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -136,10 +141,10 @@
             tabPage2.Controls.Add(splitContainer2);
             tabPage2.Controls.Add(toolStrip1);
             tabPage2.Controls.Add(groupBox1);
-            tabPage2.Location = new Point(4, 27);
+            tabPage2.Location = new Point(4, 32);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1097, 622);
+            tabPage2.Size = new Size(1097, 617);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Compare";
             tabPage2.UseVisualStyleBackColor = true;
@@ -157,7 +162,7 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(txtResultRight);
-            splitContainer2.Size = new Size(1091, 456);
+            splitContainer2.Size = new Size(1091, 451);
             splitContainer2.SplitterDistance = 363;
             splitContainer2.TabIndex = 1;
             // 
@@ -170,7 +175,7 @@
             txtResultLeft.Multiline = true;
             txtResultLeft.Name = "txtResultLeft";
             txtResultLeft.ScrollBars = ScrollBars.Both;
-            txtResultLeft.Size = new Size(363, 456);
+            txtResultLeft.Size = new Size(363, 451);
             txtResultLeft.TabIndex = 0;
             txtResultLeft.Text = resources.GetString("txtResultLeft.Text");
             txtResultLeft.WordWrap = false;
@@ -184,7 +189,7 @@
             txtResultRight.Multiline = true;
             txtResultRight.Name = "txtResultRight";
             txtResultRight.ScrollBars = ScrollBars.Both;
-            txtResultRight.Size = new Size(724, 456);
+            txtResultRight.Size = new Size(724, 451);
             txtResultRight.TabIndex = 1;
             txtResultRight.Text = resources.GetString("txtResultRight.Text");
             txtResultRight.WordWrap = false;
@@ -194,7 +199,7 @@
             toolStrip1.Dock = DockStyle.Bottom;
             toolStrip1.GripStyle = ToolStripGripStyle.Hidden;
             toolStrip1.Items.AddRange(new ToolStripItem[] { stripRunCount, stripRunTime });
-            toolStrip1.Location = new Point(3, 594);
+            toolStrip1.Location = new Point(3, 589);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.RenderMode = ToolStripRenderMode.System;
             toolStrip1.Size = new Size(1091, 25);
@@ -219,6 +224,7 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnSendToBComp);
             groupBox1.Controls.Add(btnRunCompare);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(3, 3);
@@ -227,6 +233,16 @@
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Control Panel";
+            // 
+            // btnSendToBComp
+            // 
+            btnSendToBComp.Location = new Point(183, 22);
+            btnSendToBComp.Name = "btnSendToBComp";
+            btnSendToBComp.Size = new Size(180, 23);
+            btnSendToBComp.TabIndex = 4;
+            btnSendToBComp.Text = "Compare result in BComp";
+            btnSendToBComp.UseVisualStyleBackColor = true;
+            btnSendToBComp.Click += btnSendToBComp_Click;
             // 
             // btnRunCompare
             // 
@@ -240,6 +256,9 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(btnBComp);
+            tabPage3.Controls.Add(txtBComp);
+            tabPage3.Controls.Add(label1);
             tabPage3.Location = new Point(4, 27);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -247,6 +266,33 @@
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Settings";
             tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // btnBComp
+            // 
+            btnBComp.Location = new Point(501, 28);
+            btnBComp.Name = "btnBComp";
+            btnBComp.Size = new Size(75, 28);
+            btnBComp.TabIndex = 2;
+            btnBComp.Text = "Browse";
+            btnBComp.UseVisualStyleBackColor = true;
+            btnBComp.Click += btnBComp_Click;
+            // 
+            // txtBComp
+            // 
+            txtBComp.Location = new Point(8, 31);
+            txtBComp.Name = "txtBComp";
+            txtBComp.ReadOnly = true;
+            txtBComp.Size = new Size(487, 23);
+            txtBComp.TabIndex = 1;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(8, 13);
+            label1.Name = "label1";
+            label1.Size = new Size(198, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Beyond Compare - BComp.exe path";
             // 
             // panel1
             // 
@@ -284,6 +330,8 @@
             toolStrip1.ResumeLayout(false);
             toolStrip1.PerformLayout();
             groupBox1.ResumeLayout(false);
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -305,5 +353,9 @@
         private ToolStripLabel stripRunCount;
         private ToolStripLabel stripRunTime;
         private Panel panel1;
+        private TextBox txtBComp;
+        private Label label1;
+        private Button btnBComp;
+        private Button btnSendToBComp;
     }
 }
