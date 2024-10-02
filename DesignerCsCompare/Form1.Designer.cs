@@ -34,6 +34,10 @@
             txtSourceRight = new TextBox();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            groupBox2 = new GroupBox();
+            btnClearLeft = new Button();
+            btnClearBoth = new Button();
+            btnClearRight = new Button();
             tabPage2 = new TabPage();
             splitContainer2 = new SplitContainer();
             txtResultLeft = new TextBox();
@@ -55,6 +59,7 @@
             splitContainer1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            groupBox2.SuspendLayout();
             tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
@@ -68,7 +73,7 @@
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(3, 3);
+            splitContainer1.Location = new Point(3, 70);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -78,7 +83,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(txtSourceRight);
-            splitContainer1.Size = new Size(1091, 616);
+            splitContainer1.Size = new Size(1091, 544);
             splitContainer1.SplitterDistance = 363;
             splitContainer1.TabIndex = 0;
             // 
@@ -91,7 +96,7 @@
             txtSourceLeft.Multiline = true;
             txtSourceLeft.Name = "txtSourceLeft";
             txtSourceLeft.ScrollBars = ScrollBars.Both;
-            txtSourceLeft.Size = new Size(363, 616);
+            txtSourceLeft.Size = new Size(363, 544);
             txtSourceLeft.TabIndex = 0;
             txtSourceLeft.Text = resources.GetString("txtSourceLeft.Text");
             txtSourceLeft.WordWrap = false;
@@ -105,7 +110,7 @@
             txtSourceRight.Multiline = true;
             txtSourceRight.Name = "txtSourceRight";
             txtSourceRight.ScrollBars = ScrollBars.Both;
-            txtSourceRight.Size = new Size(724, 616);
+            txtSourceRight.Size = new Size(724, 544);
             txtSourceRight.TabIndex = 1;
             txtSourceRight.Text = resources.GetString("txtSourceRight.Text");
             txtSourceRight.WordWrap = false;
@@ -128,13 +133,58 @@
             // tabPage1
             // 
             tabPage1.Controls.Add(splitContainer1);
-            tabPage1.Location = new Point(4, 27);
+            tabPage1.Controls.Add(groupBox2);
+            tabPage1.Location = new Point(4, 32);
             tabPage1.Name = "tabPage1";
             tabPage1.Padding = new Padding(3);
-            tabPage1.Size = new Size(1097, 622);
+            tabPage1.Size = new Size(1097, 617);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Source Text";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // groupBox2
+            // 
+            groupBox2.AutoSize = true;
+            groupBox2.Controls.Add(btnClearLeft);
+            groupBox2.Controls.Add(btnClearBoth);
+            groupBox2.Controls.Add(btnClearRight);
+            groupBox2.Dock = DockStyle.Top;
+            groupBox2.Location = new Point(3, 3);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(1091, 67);
+            groupBox2.TabIndex = 3;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Control Panel";
+            // 
+            // btnClearLeft
+            // 
+            btnClearLeft.Location = new Point(6, 22);
+            btnClearLeft.Name = "btnClearLeft";
+            btnClearLeft.Size = new Size(75, 23);
+            btnClearLeft.TabIndex = 0;
+            btnClearLeft.Text = "Clear Left";
+            btnClearLeft.UseVisualStyleBackColor = true;
+            btnClearLeft.Click += btnClearLeft_Click;
+            // 
+            // btnClearBoth
+            // 
+            btnClearBoth.Location = new Point(168, 22);
+            btnClearBoth.Name = "btnClearBoth";
+            btnClearBoth.Size = new Size(75, 23);
+            btnClearBoth.TabIndex = 2;
+            btnClearBoth.Text = "Clear Both";
+            btnClearBoth.UseVisualStyleBackColor = true;
+            btnClearBoth.Click += btnClearBoth_Click;
+            // 
+            // btnClearRight
+            // 
+            btnClearRight.Location = new Point(87, 22);
+            btnClearRight.Name = "btnClearRight";
+            btnClearRight.Size = new Size(75, 23);
+            btnClearRight.TabIndex = 1;
+            btnClearRight.Text = "Clear Right";
+            btnClearRight.UseVisualStyleBackColor = true;
+            btnClearRight.Click += btnClearRight_Click;
             // 
             // tabPage2
             // 
@@ -152,7 +202,7 @@
             // splitContainer2
             // 
             splitContainer2.Dock = DockStyle.Fill;
-            splitContainer2.Location = new Point(3, 138);
+            splitContainer2.Location = new Point(3, 70);
             splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -162,7 +212,7 @@
             // splitContainer2.Panel2
             // 
             splitContainer2.Panel2.Controls.Add(txtResultRight);
-            splitContainer2.Size = new Size(1091, 451);
+            splitContainer2.Size = new Size(1091, 519);
             splitContainer2.SplitterDistance = 363;
             splitContainer2.TabIndex = 1;
             // 
@@ -175,7 +225,7 @@
             txtResultLeft.Multiline = true;
             txtResultLeft.Name = "txtResultLeft";
             txtResultLeft.ScrollBars = ScrollBars.Both;
-            txtResultLeft.Size = new Size(363, 451);
+            txtResultLeft.Size = new Size(363, 519);
             txtResultLeft.TabIndex = 0;
             txtResultLeft.Text = resources.GetString("txtResultLeft.Text");
             txtResultLeft.WordWrap = false;
@@ -189,7 +239,7 @@
             txtResultRight.Multiline = true;
             txtResultRight.Name = "txtResultRight";
             txtResultRight.ScrollBars = ScrollBars.Both;
-            txtResultRight.Size = new Size(724, 451);
+            txtResultRight.Size = new Size(724, 519);
             txtResultRight.TabIndex = 1;
             txtResultRight.Text = resources.GetString("txtResultRight.Text");
             txtResultRight.WordWrap = false;
@@ -224,12 +274,13 @@
             // 
             // groupBox1
             // 
+            groupBox1.AutoSize = true;
             groupBox1.Controls.Add(btnSendToBComp);
             groupBox1.Controls.Add(btnRunCompare);
             groupBox1.Dock = DockStyle.Top;
             groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(1091, 135);
+            groupBox1.Size = new Size(1091, 67);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Control Panel";
@@ -259,10 +310,10 @@
             tabPage3.Controls.Add(btnBComp);
             tabPage3.Controls.Add(txtBComp);
             tabPage3.Controls.Add(label1);
-            tabPage3.Location = new Point(4, 27);
+            tabPage3.Location = new Point(4, 32);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(1097, 622);
+            tabPage3.Size = new Size(1097, 617);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "Settings";
             tabPage3.UseVisualStyleBackColor = true;
@@ -319,6 +370,8 @@
             splitContainer1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
+            tabPage1.PerformLayout();
+            groupBox2.ResumeLayout(false);
             tabPage2.ResumeLayout(false);
             tabPage2.PerformLayout();
             splitContainer2.Panel1.ResumeLayout(false);
@@ -357,5 +410,9 @@
         private Label label1;
         private Button btnBComp;
         private Button btnSendToBComp;
+        private Button btnClearBoth;
+        private Button btnClearRight;
+        private Button btnClearLeft;
+        private GroupBox groupBox2;
     }
 }

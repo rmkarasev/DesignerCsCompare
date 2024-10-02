@@ -121,7 +121,7 @@ namespace DesignerCsCompare
                 Directory.CreateDirectory(tempDir);
 
             var leftPath = Path.Combine(tempDir, $"leftResult-{DateTime.Now:yyyy-MM-dd_HH-mm-ss-fff}");
-            var rightPath = Path.Combine(tempDir,$"rightResult-{DateTime.Now:yyyy-MM-dd_HH-mm-ss-fff}");
+            var rightPath = Path.Combine(tempDir, $"rightResult-{DateTime.Now:yyyy-MM-dd_HH-mm-ss-fff}");
 
             File.WriteAllText(leftPath, txtResultLeft.Text ?? "");
             File.WriteAllText(rightPath, txtResultRight.Text ?? "");
@@ -130,6 +130,22 @@ namespace DesignerCsCompare
             startInfo.FileName = bCompPath;
             startInfo.Arguments = $"\"{leftPath}\" \"{rightPath}\"";
             Process.Start(startInfo);
+        }
+
+        private void btnClearLeft_Click(object sender, EventArgs e)
+        {
+            txtSourceLeft.Text = "";
+        }
+
+        private void btnClearRight_Click(object sender, EventArgs e)
+        {
+            txtSourceRight.Text = "";
+        }
+
+        private void btnClearBoth_Click(object sender, EventArgs e)
+        {
+            txtSourceLeft.Text = "";
+            txtSourceRight.Text = "";
         }
     }
 }
