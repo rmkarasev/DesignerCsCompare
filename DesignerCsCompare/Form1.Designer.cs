@@ -32,13 +32,11 @@
             splitContainer1 = new SplitContainer();
             txtSourceLeft = new TextBox();
             txtSourceRight = new TextBox();
-            tabControl1 = new TabControl();
+            tcMain = new TabControl();
             tabPage1 = new TabPage();
             groupBox2 = new GroupBox();
-            btnClearLeft = new Button();
             btnClearBoth = new Button();
-            btnClearRight = new Button();
-            tabPage2 = new TabPage();
+            tabCompare = new TabPage();
             splitContainer2 = new SplitContainer();
             txtResultLeft = new TextBox();
             txtResultRight = new TextBox();
@@ -53,14 +51,15 @@
             txtBComp = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
+            btnRunCompareFromSource = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
-            tabControl1.SuspendLayout();
+            tcMain.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox2.SuspendLayout();
-            tabPage2.SuspendLayout();
+            tabCompare.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer2).BeginInit();
             splitContainer2.Panel1.SuspendLayout();
             splitContainer2.Panel2.SuspendLayout();
@@ -73,7 +72,7 @@
             // splitContainer1
             // 
             splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(3, 70);
+            splitContainer1.Location = new Point(3, 72);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -83,7 +82,7 @@
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(txtSourceRight);
-            splitContainer1.Size = new Size(1091, 544);
+            splitContainer1.Size = new Size(1091, 542);
             splitContainer1.SplitterDistance = 363;
             splitContainer1.TabIndex = 0;
             // 
@@ -96,7 +95,7 @@
             txtSourceLeft.Multiline = true;
             txtSourceLeft.Name = "txtSourceLeft";
             txtSourceLeft.ScrollBars = ScrollBars.Both;
-            txtSourceLeft.Size = new Size(363, 544);
+            txtSourceLeft.Size = new Size(363, 542);
             txtSourceLeft.TabIndex = 0;
             txtSourceLeft.Text = resources.GetString("txtSourceLeft.Text");
             txtSourceLeft.WordWrap = false;
@@ -110,25 +109,25 @@
             txtSourceRight.Multiline = true;
             txtSourceRight.Name = "txtSourceRight";
             txtSourceRight.ScrollBars = ScrollBars.Both;
-            txtSourceRight.Size = new Size(724, 544);
+            txtSourceRight.Size = new Size(724, 542);
             txtSourceRight.TabIndex = 1;
             txtSourceRight.Text = resources.GetString("txtSourceRight.Text");
             txtSourceRight.WordWrap = false;
             // 
-            // tabControl1
+            // tcMain
             // 
-            tabControl1.Appearance = TabAppearance.Buttons;
-            tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
-            tabControl1.Controls.Add(tabPage3);
-            tabControl1.Dock = DockStyle.Fill;
-            tabControl1.ItemSize = new Size(100, 28);
-            tabControl1.Location = new Point(0, 3);
-            tabControl1.Name = "tabControl1";
-            tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1105, 653);
-            tabControl1.SizeMode = TabSizeMode.Fixed;
-            tabControl1.TabIndex = 1;
+            tcMain.Appearance = TabAppearance.Buttons;
+            tcMain.Controls.Add(tabPage1);
+            tcMain.Controls.Add(tabCompare);
+            tcMain.Controls.Add(tabPage3);
+            tcMain.Dock = DockStyle.Fill;
+            tcMain.ItemSize = new Size(100, 28);
+            tcMain.Location = new Point(0, 3);
+            tcMain.Name = "tcMain";
+            tcMain.SelectedIndex = 0;
+            tcMain.Size = new Size(1105, 653);
+            tcMain.SizeMode = TabSizeMode.Fixed;
+            tcMain.TabIndex = 1;
             // 
             // tabPage1
             // 
@@ -145,59 +144,38 @@
             // groupBox2
             // 
             groupBox2.AutoSize = true;
-            groupBox2.Controls.Add(btnClearLeft);
+            groupBox2.Controls.Add(btnRunCompareFromSource);
             groupBox2.Controls.Add(btnClearBoth);
-            groupBox2.Controls.Add(btnClearRight);
             groupBox2.Dock = DockStyle.Top;
             groupBox2.Location = new Point(3, 3);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(1091, 67);
+            groupBox2.Size = new Size(1091, 69);
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Control Panel";
             // 
-            // btnClearLeft
-            // 
-            btnClearLeft.Location = new Point(6, 22);
-            btnClearLeft.Name = "btnClearLeft";
-            btnClearLeft.Size = new Size(75, 23);
-            btnClearLeft.TabIndex = 0;
-            btnClearLeft.Text = "Clear Left";
-            btnClearLeft.UseVisualStyleBackColor = true;
-            btnClearLeft.Click += btnClearLeft_Click;
-            // 
             // btnClearBoth
             // 
-            btnClearBoth.Location = new Point(168, 22);
+            btnClearBoth.Location = new Point(6, 22);
             btnClearBoth.Name = "btnClearBoth";
-            btnClearBoth.Size = new Size(75, 23);
+            btnClearBoth.Size = new Size(100, 25);
             btnClearBoth.TabIndex = 2;
             btnClearBoth.Text = "Clear Both";
             btnClearBoth.UseVisualStyleBackColor = true;
             btnClearBoth.Click += btnClearBoth_Click;
             // 
-            // btnClearRight
+            // tabCompare
             // 
-            btnClearRight.Location = new Point(87, 22);
-            btnClearRight.Name = "btnClearRight";
-            btnClearRight.Size = new Size(75, 23);
-            btnClearRight.TabIndex = 1;
-            btnClearRight.Text = "Clear Right";
-            btnClearRight.UseVisualStyleBackColor = true;
-            btnClearRight.Click += btnClearRight_Click;
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(splitContainer2);
-            tabPage2.Controls.Add(toolStrip1);
-            tabPage2.Controls.Add(groupBox1);
-            tabPage2.Location = new Point(4, 32);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(1097, 617);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Compare";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabCompare.Controls.Add(splitContainer2);
+            tabCompare.Controls.Add(toolStrip1);
+            tabCompare.Controls.Add(groupBox1);
+            tabCompare.Location = new Point(4, 32);
+            tabCompare.Name = "tabCompare";
+            tabCompare.Padding = new Padding(3);
+            tabCompare.Size = new Size(1097, 617);
+            tabCompare.TabIndex = 1;
+            tabCompare.Text = "Compare";
+            tabCompare.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
             // 
@@ -353,12 +331,22 @@
             panel1.Size = new Size(1105, 3);
             panel1.TabIndex = 2;
             // 
+            // btnRunCompareFromSource
+            // 
+            btnRunCompareFromSource.Location = new Point(142, 22);
+            btnRunCompareFromSource.Name = "btnRunCompareFromSource";
+            btnRunCompareFromSource.Size = new Size(100, 25);
+            btnRunCompareFromSource.TabIndex = 3;
+            btnRunCompareFromSource.Text = "Run Compare";
+            btnRunCompareFromSource.UseVisualStyleBackColor = true;
+            btnRunCompareFromSource.Click += btnRunCompareFromSource_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1105, 656);
-            Controls.Add(tabControl1);
+            Controls.Add(tcMain);
             Controls.Add(panel1);
             Name = "Form1";
             Text = "Designer.cs Compare";
@@ -368,12 +356,12 @@
             splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
-            tabControl1.ResumeLayout(false);
+            tcMain.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             groupBox2.ResumeLayout(false);
-            tabPage2.ResumeLayout(false);
-            tabPage2.PerformLayout();
+            tabCompare.ResumeLayout(false);
+            tabCompare.PerformLayout();
             splitContainer2.Panel1.ResumeLayout(false);
             splitContainer2.Panel1.PerformLayout();
             splitContainer2.Panel2.ResumeLayout(false);
@@ -392,9 +380,9 @@
 
         private SplitContainer splitContainer1;
         private TextBox txtSourceLeft;
-        private TabControl tabControl1;
+        private TabControl tcMain;
         private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage tabCompare;
         private TabPage tabPage3;
         private TextBox txtSourceRight;
         private SplitContainer splitContainer2;
@@ -411,8 +399,7 @@
         private Button btnBComp;
         private Button btnSendToBComp;
         private Button btnClearBoth;
-        private Button btnClearRight;
-        private Button btnClearLeft;
         private GroupBox groupBox2;
+        private Button btnRunCompareFromSource;
     }
 }

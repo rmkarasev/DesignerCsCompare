@@ -66,6 +66,17 @@ namespace DesignerCsCompare
 
         private void btnRunCompare_Click(object sender, EventArgs e)
         {
+            RunCompare();
+        }
+
+        private void btnRunCompareFromSource_Click(object sender, EventArgs e)
+        {
+            tcMain.SelectTab(tabCompare);
+            RunCompare();
+        }
+
+        private void RunCompare()
+        {
             var sw = Stopwatch.StartNew();
 
             var leftText = txtSourceLeft.Lines;
@@ -133,16 +144,6 @@ namespace DesignerCsCompare
             startInfo.FileName = bCompPath;
             startInfo.Arguments = $"\"{leftPath}\" \"{rightPath}\"";
             Process.Start(startInfo);
-        }
-
-        private void btnClearLeft_Click(object sender, EventArgs e)
-        {
-            txtSourceLeft.Text = "";
-        }
-
-        private void btnClearRight_Click(object sender, EventArgs e)
-        {
-            txtSourceRight.Text = "";
         }
 
         private void btnClearBoth_Click(object sender, EventArgs e)
