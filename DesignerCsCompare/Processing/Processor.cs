@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,11 +68,23 @@ namespace DesignerCsCompare.Processing
             return (leftResult, rightResult);
         }
 
-        private static string TrimText(string s)
+        private static string TrimText(string str)
         {
-            var trimmedText = s.TrimStart();
+            var trimmedText = str.TrimStart();
 
-            // Rule 1: remove '()' after ISupportInitialize
+            // Rule 1
+            // Remove EventHandler type
+            // example this.gridView1.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridView1_CustomRowCellEdit);
+            trimmedText = TrimEventHandlerType(trimmedText, "System.EventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraEditors.Controls.ButtonPressedEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterItemEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterItemValueChangedEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterCustomizeParametersEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.FetchOverrideHandler");
+
+            // Rule 2: remove '()' after ISupportInitialize
             if (trimmedText.StartsWith("((System.ComponentModel.ISupportInitialize)(this."))
             {
                 var pos = trimmedText.IndexOf("(this.", StringComparison.Ordinal);
@@ -82,11 +95,27 @@ namespace DesignerCsCompare.Processing
                     trimmedText = trimmedText.Remove(pos, 1); // ) symbol
             }
 
-            // Rule 2: remove 'this.'
+            // Rule 3: remove 'this.'
             trimmedText = trimmedText.Replace("this.", "");
 
             return trimmedText;
         }
-        
+
+        private static string TrimEventHandlerType(string str, string eventHandlerType)
+        {
+            var pattern = $"new {eventHandlerType}(";
+
+            var pos = str.IndexOf(pattern);
+            if (pos > -1)
+            {
+                str = str.Remove(pos, pattern.Length);
+
+                pos = str.IndexOf(")", pos, StringComparison.Ordinal);
+                if (pos > 0)
+                    str = str.Remove(pos, 1);
+            }
+
+            return str;
+        }
     }
 }
