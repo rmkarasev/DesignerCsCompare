@@ -1,8 +1,10 @@
-﻿using System;
+﻿using DesignerCsCompare.Properties;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 #nullable enable
@@ -18,6 +20,8 @@ namespace DesignerCsCompare.Processing
             _leftText = leftText;
             _rightText = rightText;
         }
+
+        public ProcessorOptions Options { get; } = new();
 
         public (string[] leftText, string[] rightText) GetDifference()
         {
@@ -62,6 +66,10 @@ namespace DesignerCsCompare.Processing
                     }
                 }
             }
+
+
+            if (Options.PostProcessDataColumnDefaultValues)
+                PostProcessDataColumnDefaultValues(rightLines);
 
             var leftResult = leftLines.Where(x => !x.HasMatch).Select(x => x.Text).ToArray();
             var rightResult = rightLines.Where(x => !x.HasMatch).Select(x => x.Text).ToArray();
@@ -145,6 +153,35 @@ namespace DesignerCsCompare.Processing
             }
 
             return str;
+        }
+
+        private void PostProcessDataColumnDefaultValues(IList<LineContext> lines)
+        {
+            // dataColumn14.Caption = "Type";
+            // dataColumn14.DefaultValue = resources.GetObject("dataColumn14.DefaultValue");
+            // dataColumn14.Namespace = "";
+
+            for (var i = lines.Count - 1; i >= 0; i--)
+            {
+                var line = lines[i];
+                if (Regex.IsMatch(line.TrimmedText, @"^dataColumn\d+\.Caption = "))
+                {
+                    lines.RemoveAt(i);
+                    continue;
+                }
+
+                if (Regex.IsMatch(line.TrimmedText, @"^dataColumn\d+\.DefaultValue = resources"))
+                {
+                    lines.RemoveAt(i);
+                    continue;
+                }
+
+                if (Regex.IsMatch(line.TrimmedText, @"^dataColumn\d+\.Namespace = \""\"";"))
+                {
+                    lines.RemoveAt(i);
+                    continue;
+                }
+            }
         }
     }
 }

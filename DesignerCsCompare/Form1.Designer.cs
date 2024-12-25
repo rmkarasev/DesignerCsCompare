@@ -35,6 +35,8 @@
             tcMain = new TabControl();
             tabPage1 = new TabPage();
             groupBox2 = new GroupBox();
+            chkPostProcessDataColumnDefaultValues = new CheckBox();
+            btnRunCompareFromSource = new Button();
             btnClearBoth = new Button();
             tabCompare = new TabPage();
             splitContainer2 = new SplitContainer();
@@ -51,7 +53,6 @@
             txtBComp = new TextBox();
             label1 = new Label();
             panel1 = new Panel();
-            btnRunCompareFromSource = new Button();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
@@ -144,6 +145,7 @@
             // groupBox2
             // 
             groupBox2.AutoSize = true;
+            groupBox2.Controls.Add(chkPostProcessDataColumnDefaultValues);
             groupBox2.Controls.Add(btnRunCompareFromSource);
             groupBox2.Controls.Add(btnClearBoth);
             groupBox2.Dock = DockStyle.Top;
@@ -153,6 +155,27 @@
             groupBox2.TabIndex = 3;
             groupBox2.TabStop = false;
             groupBox2.Text = "Control Panel";
+            // 
+            // chkPostProcessDataColumnDefaultValues
+            // 
+            chkPostProcessDataColumnDefaultValues.AutoSize = true;
+            chkPostProcessDataColumnDefaultValues.Location = new Point(280, 26);
+            chkPostProcessDataColumnDefaultValues.Name = "chkPostProcessDataColumnDefaultValues";
+            chkPostProcessDataColumnDefaultValues.Size = new Size(286, 19);
+            chkPostProcessDataColumnDefaultValues.TabIndex = 3;
+            chkPostProcessDataColumnDefaultValues.Text = "Post-process: remove DataColumn default values";
+            chkPostProcessDataColumnDefaultValues.UseVisualStyleBackColor = true;
+            chkPostProcessDataColumnDefaultValues.CheckedChanged += chkPostProcessDataColumnDefaultValues_CheckedChanged;
+            // 
+            // btnRunCompareFromSource
+            // 
+            btnRunCompareFromSource.Location = new Point(142, 22);
+            btnRunCompareFromSource.Name = "btnRunCompareFromSource";
+            btnRunCompareFromSource.Size = new Size(100, 25);
+            btnRunCompareFromSource.TabIndex = 3;
+            btnRunCompareFromSource.Text = "Run Compare";
+            btnRunCompareFromSource.UseVisualStyleBackColor = true;
+            btnRunCompareFromSource.Click += btnRunCompareFromSource_Click;
             // 
             // btnClearBoth
             // 
@@ -331,16 +354,6 @@
             panel1.Size = new Size(1105, 3);
             panel1.TabIndex = 2;
             // 
-            // btnRunCompareFromSource
-            // 
-            btnRunCompareFromSource.Location = new Point(142, 22);
-            btnRunCompareFromSource.Name = "btnRunCompareFromSource";
-            btnRunCompareFromSource.Size = new Size(100, 25);
-            btnRunCompareFromSource.TabIndex = 3;
-            btnRunCompareFromSource.Text = "Run Compare";
-            btnRunCompareFromSource.UseVisualStyleBackColor = true;
-            btnRunCompareFromSource.Click += btnRunCompareFromSource_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -360,6 +373,7 @@
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
             groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             tabCompare.ResumeLayout(false);
             tabCompare.PerformLayout();
             splitContainer2.Panel1.ResumeLayout(false);
@@ -401,5 +415,6 @@
         private Button btnClearBoth;
         private GroupBox groupBox2;
         private Button btnRunCompareFromSource;
+        private CheckBox chkPostProcessDataColumnDefaultValues;
     }
 }

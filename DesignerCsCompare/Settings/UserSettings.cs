@@ -21,5 +21,7 @@ namespace DesignerCsCompare.Settings
         public Rectangle WindowBounds { get; set; }
         
         public string BeyondComparePath { get; set; }
+
+        public bool PostProcessDataColumnDefaultValues { get; set; }
     }
 }

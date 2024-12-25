@@ -49,6 +49,7 @@ namespace DesignerCsCompare
             txtResultLeft.Text = "Run Compare to get difference";
             txtResultRight.Text = "Run Compare to get difference";
 
+            chkPostProcessDataColumnDefaultValues.Checked = _userSettings.PostProcessDataColumnDefaultValues;
             txtBComp.Text = _userSettings.BeyondComparePath;
         }
 
@@ -83,6 +84,8 @@ namespace DesignerCsCompare
             var rightText = txtSourceRight.Lines;
 
             var processor = new Processor(leftText, rightText);
+            processor.Options.PostProcessDataColumnDefaultValues = _userSettings.PostProcessDataColumnDefaultValues;
+
             var (leftResult, rightResult) = processor.GetDifference();
 
             txtResultLeft.Lines = leftResult;
@@ -150,6 +153,12 @@ namespace DesignerCsCompare
         {
             txtSourceLeft.Text = "";
             txtSourceRight.Text = "";
+        }
+
+        private void chkPostProcessDataColumnDefaultValues_CheckedChanged(object sender, EventArgs e)
+        {
+            _userSettings.PostProcessDataColumnDefaultValues = chkPostProcessDataColumnDefaultValues.Checked;
+            _userSettingsRepository.SaveSettings(_userSettings);
         }
     }
 }
