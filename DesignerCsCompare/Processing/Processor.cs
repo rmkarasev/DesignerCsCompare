@@ -76,13 +76,22 @@ namespace DesignerCsCompare.Processing
             // Remove EventHandler type
             // example this.gridView1.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridView1_CustomRowCellEdit);
             trimmedText = TrimEventHandlerType(trimmedText, "System.EventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "System.Windows.Forms.KeyEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraGrid.Views.Base.CustomColumnDisplayTextEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraEditors.Controls.ButtonPressedEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraEditors.Controls.CustomDisplayTextEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "DevExpress.XtraEditors.Controls.ChangingEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterItemEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterItemValueChangedEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Forms.FilterCustomizeParametersEventHandler");
             trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.FetchOverrideHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.GetFetchSqlEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.AfterFetchEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.BeforeApplyUpdatesEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.AfterApplyUpdatesEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.OverrideRecordUpdateSqlEventHandler");
+            trimmedText = TrimEventHandlerType(trimmedText, "AestheticSoft.Onyx.Data.TransactionHandler");
 
             // Rule 2: remove '()' after ISupportInitialize
             if (trimmedText.StartsWith("((System.ComponentModel.ISupportInitialize)(this."))
