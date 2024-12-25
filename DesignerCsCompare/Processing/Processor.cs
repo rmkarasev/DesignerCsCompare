@@ -107,7 +107,27 @@ namespace DesignerCsCompare.Processing
             // Rule 3: remove 'this.'
             trimmedText = trimmedText.Replace("this.", "");
 
+            // Rule 4: AutoIncrement
+            trimmedText = TrimAutoIncrement(trimmedText);
+
             return trimmedText;
+        }
+
+        private static readonly (string Origin, string Replacement)[] AutoIncrementPatterns =
+        {
+            ("AutoIncrementSeed = ((long)(-1000));", "AutoIncrementSeed = -1000L;"),
+            ("AutoIncrementStep = ((long)(-1));", "AutoIncrementStep = -1L;"),
+        };
+
+        private static string TrimAutoIncrement(string str)
+        {
+            foreach (var pattern in AutoIncrementPatterns)
+            {
+                if (str.EndsWith(pattern.Origin))
+                    str = str.Replace(pattern.Origin, pattern.Replacement);
+            }
+
+            return str;
         }
 
         private static string TrimEventHandlerType(string str, string eventHandlerType)
