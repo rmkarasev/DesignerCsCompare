@@ -38,13 +38,11 @@ internal class UserSettingsRepository : IUserSettingsRepository
         if (!Directory.Exists(_userSettingsDir))
             Directory.CreateDirectory(_userSettingsDir);
 
-        using (var fs = File.OpenWrite(_userSettingsPath))
-        {
-            var serializerOptions = new JsonSerializerOptions();
-            serializerOptions.WriteIndented = true;
-            JsonSerializer.Serialize(fs, userSettings, serializerOptions);
-        }
+        var serializerOptions = new JsonSerializerOptions();
+        serializerOptions.WriteIndented = true;
+        string jsonString  = JsonSerializer.Serialize(userSettings, serializerOptions);
 
+        File.WriteAllText(_userSettingsPath, jsonString);
         File.WriteAllText(_leftRecentTextPath, userSettings.LeftText ?? "");
         File.WriteAllText(_rightRecentTextPath, userSettings.RightText ?? "");
     }
