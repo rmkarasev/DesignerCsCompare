@@ -15,8 +15,9 @@ namespace DesignerCsCompare
             ApplicationConfiguration.Initialize();
 
             var userSettingsRepository = new UserSettingsRepository();
+            var mainForm = new Form1(userSettingsRepository);
 
-            Application.Run(new Form1(userSettingsRepository));
+            Application.Run(mainForm);
         }
     }
 }

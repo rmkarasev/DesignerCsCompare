@@ -80,6 +80,8 @@ namespace DesignerCsCompare.Processing
         {
             var trimmedText = str.TrimStart();
 
+            trimmedText = TrimNamespaceBeforeType(trimmedText, "System.Windows.Forms");
+
             // Rule 1
             // Remove EventHandler type
             // example this.gridView1.CustomRowCellEdit += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gridView1_CustomRowCellEdit);
@@ -133,6 +135,41 @@ namespace DesignerCsCompare.Processing
             {
                 if (str.EndsWith(pattern.Origin))
                     str = str.Replace(pattern.Origin, pattern.Replacement);
+            }
+
+            return str;
+        }
+
+        private static string TrimNamespaceBeforeType(string str, string namespaceStr)
+        {
+            // TODO: maybe better replace known types
+            // System.Windows.Forms.ColumnStyle > ColumnStyle
+
+            // = new System.Windows.Forms.TableLayoutPanel();
+            var pattern = $@"= new {namespaceStr}.";
+            if (str.IndexOf(pattern, StringComparison.Ordinal) > 0)
+            {
+                var regexExpr = Regex.Escape(pattern);
+                var result = Regex.Replace(str, regexExpr, "= new ");
+                return result;
+            }
+
+            // this.tlpDiagnoses.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            pattern = $@".Add(new {namespaceStr}.";
+            if (str.IndexOf(pattern, StringComparison.Ordinal) > 0)
+            {
+                var regexExpr = Regex.Escape(pattern);
+                var result = Regex.Replace(str, regexExpr, ".Add(new ");
+                return result;
+            }
+
+            // this.lblAdmissionDate.Dock = System.Windows.Forms.DockStyle.Fill;
+            pattern = $@" = {namespaceStr}.";
+            if (str.IndexOf(pattern, StringComparison.Ordinal) > 0)
+            {
+                var regexExpr = Regex.Escape(pattern);
+                var result = Regex.Replace(str, regexExpr, " = ");
+                return result;
             }
 
             return str;
